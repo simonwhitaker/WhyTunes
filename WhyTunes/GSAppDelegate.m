@@ -6,24 +6,6 @@
 //  Copyright (c) 2013 Goo Software Ltd. All rights reserved.
 //
 
-enum {
-    kRest,
-    kBasso,
-    kBlow,
-    kBottle,
-    kFrog,
-    kFunk,
-    kGlass,
-    kHero,
-    kMorse,
-    kPing,
-    kPop,
-    kPurr,
-    kSosumi,
-    kSubmarine,
-    kTink
-};
-
 #import "GSAppDelegate.h"
 
 @interface GSAppDelegate() {
@@ -36,47 +18,51 @@ enum {
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
     
-    _timer = [NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(GS_play) userInfo:nil repeats:YES];
+    _timer = [NSTimer scheduledTimerWithTimeInterval:0.15 target:self selector:@selector(GS_play) userInfo:nil repeats:YES];
     
 }
 
 - (void)GS_play {
     
-    static int notes[4] = {
-        kPurr,
-        kPurr,
-        kFrog,
-        kTink,
-    };
-    static int numberOfNotes = sizeof(notes)/sizeof(int);
+    static char notes[] = "\
+b-------b-------b-------b-------\
+b-------b-------b-------b---g---\
+b---P---b---P---b---P-P-b---P--P\
+b---P---b---P---b---P-P-b---P--P\
+b-t-P---b-t-P---b-t-P-P-b-t-P--P\
+b-t-P---b-t-P---b-t-P-P-b-t-P--P\
+b-ttP-t-btttP-t-b-ttP-t-btttP-tP\
+b-ttP-t-btttP-t-b---P----tt-tt-t\
+";
+    static int numberOfNotes = sizeof(notes)/sizeof(char) - 1;
     static int beat = 0;
     
     switch (notes[beat]) {
-        case kBasso:
+        case 'b': // Basso
             break;
-        case kBlow:
+        case 'B': // Blow
             break;
-        case kBottle:
+        case 'o': // Bottle
             break;
-        case kFrog:
+        case 'f': // Frog
             break;
-        case kGlass:
+        case 'g': // Glass
             break;
-        case kHero:
+        case 'h': // Hero
             break;
-        case kMorse:
+        case 'm': // Morse
             break;
-        case kPing:
+        case 'p': // Ping
             break;
-        case kPop:
+        case 'P': // Pop
             break;
-        case kPurr:
+        case 'r': // Purr
             break;
-        case kSosumi:
+        case 's': // Sosumi
             break;
-        case kSubmarine:
+        case 'S': // Submarine
             break;
-        case kTink:
+        case 't': // Tink
             break;
         default:
             break;

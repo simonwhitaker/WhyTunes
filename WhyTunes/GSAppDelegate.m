@@ -8,36 +8,9 @@
 
 #import "GSAppDelegate.h"
 
-@interface GSAppDelegate() {
-    NSTimer *_timer;
-}
+void play(char note) {
 
-@end
-
-@implementation GSAppDelegate
-
-- (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
-    
-    _timer = [NSTimer scheduledTimerWithTimeInterval:0.15 target:self selector:@selector(GS_play) userInfo:nil repeats:YES];
-    
-}
-
-- (void)GS_play {
-    
-    static char notes[] = "\
-b-------b-------b-------b-------\
-b-------b-------b-------b---g---\
-b---P---b---P---b---P-P-b---P--P\
-b---P---b---P---b---P-P-b---P--P\
-b-t-P---b-t-P---b-t-P-P-b-t-P--P\
-b-t-P---b-t-P---b-t-P-P-b-t-P--P\
-b-ttP-t-btttP-t-b-ttP-t-btttP-tP\
-b-ttP-t-btttP-t-b---P----tt-tt-t\
-";
-    static int numberOfNotes = sizeof(notes)/sizeof(char) - 1;
-    static int beat = 0;
-    
-    switch (notes[beat]) {
+    switch (note) {
         case 'b': // Basso
             break;
         case 'B': // Blow
@@ -68,7 +41,41 @@ b-ttP-t-btttP-t-b---P----tt-tt-t\
             break;
     }
     
+}
+
+const char notes[] = "\
+b-------b-------b-------b-------\
+b-------b-------b-------b---g---\
+b---P---b---P---b---P-P-b---P--P\
+b---P---b---P---b---P-P-b---P--P\
+b-t-P---b-t-P---b-t-P-P-b-t-P--P\
+b-t-P---b-t-P---b-t-P-P-b-t-P--P\
+b-ttP-t-btttP-t-b-ttP-t-btttP-tP\
+b-ttP-t-btttP-t-b---P----tt-tt-t\
+";
+
+@interface GSAppDelegate() {
+    NSTimer *_timer;
+}
+@end
+
+@implementation GSAppDelegate
+
+- (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
+    
+    _timer = [NSTimer scheduledTimerWithTimeInterval:0.15 target:self selector:@selector(GS_playNote) userInfo:nil repeats:YES];
+    
+}
+
+- (void)GS_playNote {
+    
+    static int numberOfNotes = sizeof(notes)/sizeof(char) - 1;
+    static int beat = 0;
+    
+    play(notes[beat]);
+    
     beat = ++beat % numberOfNotes;
 }
+
 
 @end
